@@ -264,7 +264,7 @@ public class DecideCheckerTest extends AndroidTestCase {
             assertEquals(parsed.getCallToAction(), "I'm Down!");
             assertEquals(parsed.getCallToActionUrl(), "http://www.mixpanel.com");
             assertEquals(parsed.getId(), 119911);
-            assertEquals(parsed.getType(), InAppNotification.Type.TAKEOVER);
+            assertEquals(parsed.getType(), InAppNotification.OfType.TAKEOVER);
 
             assertTrue(parseNotificationOnly.surveys.isEmpty());
         }
@@ -300,7 +300,7 @@ public class DecideCheckerTest extends AndroidTestCase {
             assertEquals(parsedNotification.getCallToAction(), "I'm Down!");
             assertEquals(parsedNotification.getCallToActionUrl(), "http://www.mixpanel.com");
             assertEquals(parsedNotification.getId(), 119911);
-            assertEquals(parsedNotification.getType(), InAppNotification.Type.MINI);
+            assertEquals(parsedNotification.getType(), InAppNotification.OfType.MINI);
 
 
             assertEquals(parseBoth.surveys.size(), 1);

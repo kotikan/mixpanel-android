@@ -3,7 +3,6 @@ package com.mixpanel.android.mpmetrics;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.Log;
@@ -23,7 +22,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -249,7 +247,7 @@ import javax.net.ssl.SSLSocketFactory;
         final Display display = wm.getDefaultDisplay();
         final int displayWidth = getDisplayWidth(display);
 
-        if (notification.getType() == InAppNotification.Type.TAKEOVER && displayWidth >= 720) {
+        if (notification.getType() == InAppNotification.OfType.TAKEOVER && displayWidth >= 720) {
             urls = new String[]{notification.getImage4xUrl(), notification.getImage2xUrl(), notification.getImageUrl()};
         }
 

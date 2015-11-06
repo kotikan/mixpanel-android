@@ -1851,8 +1851,8 @@ public class MixpanelAPI {
                             return; // Nothing to show
                         }
 
-                        final InAppNotification.Type inAppType = toShow.getType();
-                        if (inAppType == InAppNotification.Type.TAKEOVER && ! ConfigurationChecker.checkSurveyActivityAvailable(parent.getApplicationContext())) {
+                        final InAppNotification.OfType inAppType = toShow.getType();
+                        if (inAppType == InAppNotification.OfType.TAKEOVER && ! ConfigurationChecker.checkSurveyActivityAvailable(parent.getApplicationContext())) {
                             if (MPConfig.DEBUG) {
                                 Log.v(LOGTAG, "Application is not configured to show takeover notifications, none will be shown.");
                             }

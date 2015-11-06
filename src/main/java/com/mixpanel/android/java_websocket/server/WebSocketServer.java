@@ -317,8 +317,8 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 							}
 
 							SocketChannel channel = server.accept();
-							channel.configureBlocking( false );
-							WebSocketImpl w = wsf.createWebSocket( this, drafts, channel.socket() );
+							channel.configureBlocking(false);
+							WebSocketImpl w = (WebSocketImpl) wsf.createWebSocket( this, drafts, channel.socket() );
 							w.key = channel.register( selector, SelectionKey.OP_READ, w );
 							w.channel = wsf.wrapChannel( channel, w.key );
 							i.remove();
@@ -491,7 +491,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	}
 
 	@Override
-	public final void onWebsocketMessage( WebSocket conn, String message ) {
+	public final void onWebsocketMessage(WebSocket conn, String message) {
 		onMessage( conn, message );
 	}
 
@@ -502,7 +502,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	}
 
 	@Override
-	public final void onWebsocketMessage( WebSocket conn, ByteBuffer blob ) {
+	public final void onWebsocketMessageBlob(WebSocket conn, ByteBuffer blob) {
 		onMessage( conn, blob );
 	}
 
@@ -662,7 +662,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	 * This method will be called primarily because of IO or protocol errors.<br>
 	 * If the given exception is an RuntimeException that probably means that you encountered a bug.<br>
 	 * 
-	 * @param con
+	 * @param conn
 	 *            Can be null if there error does not belong to one specific websocket. For example if the servers port could not be bound.
 	 **/
 	public abstract void onError( WebSocket conn, Exception ex );
@@ -722,11 +722,6 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 	}
 
 	public interface WebSocketServerFactory extends WebSocketFactory {
-		@Override
-		public WebSocketImpl createWebSocket( WebSocketAdapter a, Draft d, Socket s );
-
-		public WebSocketImpl createWebSocket( WebSocketAdapter a, List<Draft> drafts, Socket s );
-
 		/**
 		 * Allows to wrap the Socketchannel( key.channel() ) to insert a protocol layer( like ssl or proxy authentication) beyond the ws layer.
 		 * 

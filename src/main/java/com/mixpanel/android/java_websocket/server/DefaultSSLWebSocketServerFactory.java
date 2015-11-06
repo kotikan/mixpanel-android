@@ -12,6 +12,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 
 import com.mixpanel.android.java_websocket.SSLSocketChannel2;
+import com.mixpanel.android.java_websocket.WebSocket;
 import com.mixpanel.android.java_websocket.WebSocketAdapter;
 import com.mixpanel.android.java_websocket.WebSocketImpl;
 import com.mixpanel.android.java_websocket.drafts.Draft;
@@ -40,12 +41,12 @@ public class DefaultSSLWebSocketServerFactory implements WebSocketServer.WebSock
 	}
 
 	@Override
-	public WebSocketImpl createWebSocket( WebSocketAdapter a, Draft d, Socket c ) {
+	public WebSocket createWebSocket( WebSocketAdapter a, Draft d, Socket c ) {
 		return new WebSocketImpl( a, d );
 	}
 
 	@Override
-	public WebSocketImpl createWebSocket( WebSocketAdapter a, List<Draft> d, Socket s ) {
+	public WebSocket createWebSocket( WebSocketAdapter a, List<Draft> d, Socket s ) {
 		return new WebSocketImpl( a, d );
 	}
 }

@@ -347,7 +347,7 @@ public class CardCarouselLayout extends ViewGroup {
         }
 
         @Override
-        public String getItem(int position) {
+        public Object getItem(int position) {
             return mChoices.get(position);
         }
 
@@ -513,7 +513,7 @@ public class CardCarouselLayout extends ViewGroup {
                 mChoiceView.clearChoices();
                 if (null != answerOrNull) {
                     for (int i = 0; i < answerAdapter.getCount(); i++) {
-                        final String item = answerAdapter.getItem(i);
+                        final String item = (String) answerAdapter.getItem(i);
                         if (item.equals(answerOrNull)) {
                             mChoiceView.setItemChecked(i, true);
                         }

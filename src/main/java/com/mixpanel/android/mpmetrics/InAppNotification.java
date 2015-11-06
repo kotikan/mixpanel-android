@@ -24,7 +24,7 @@ public class InAppNotification implements Parcelable {
      * InApp Notifications in Mixpanel are either TAKEOVERs, that display full screen,
      * or MINI notifications that appear and disappear on the margins of the screen.
      */
-    public enum Type {
+    public enum OfType {
         UNKNOWN {
             @Override
             public String toString() {
@@ -110,14 +110,14 @@ public class InAppNotification implements Parcelable {
         return mMessageId;
     }
 
-    public Type getType() {
-        if (Type.MINI.toString().equals(mType)) {
-            return Type.MINI;
+    public OfType getType() {
+        if (OfType.MINI.toString().equals(mType)) {
+            return OfType.MINI;
         }
-        if (Type.TAKEOVER.toString().equals(mType)) {
-            return Type.TAKEOVER;
+        if (OfType.TAKEOVER.toString().equals(mType)) {
+            return OfType.TAKEOVER;
         }
-        return Type.UNKNOWN;
+        return OfType.UNKNOWN;
     }
 
     public String getTitle() {

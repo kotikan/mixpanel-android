@@ -72,7 +72,7 @@ public interface WebSocketListener {
 	 * @param message
 	 *            The UTF-8 decoded message that was received.
 	 */
-	public void onWebsocketMessage( WebSocket conn, String message );
+	public void onWebsocketMessage(WebSocket conn, String message);
 
 	/**
 	 * Called when an entire binary frame has been received. Do whatever you want
@@ -83,7 +83,7 @@ public interface WebSocketListener {
 	 * @param blob
 	 *            The binary message that was received.
 	 */
-	public void onWebsocketMessage( WebSocket conn, ByteBuffer blob );
+	public void onWebsocketMessageBlob(WebSocket conn, ByteBuffer blob);
 
 	public void onWebsocketMessageFragment( WebSocket conn, Framedata frame );
 

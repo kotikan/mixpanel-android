@@ -158,11 +158,11 @@ public class Draft_76 extends Draft_75 {
 
 	@Override
 	public HandshakeBuilder postProcessHandshakeResponseAsServer( ClientHandshake request, ServerHandshakeBuilder response ) throws InvalidHandshakeException {
-		response.setHttpStatusMessage( "WebSocket Protocol Handshake" );
+		response.bindHttpStatusMessage("WebSocket Protocol Handshake");
 		response.put( "Upgrade", "WebSocket" );
 		response.put( "Connection", request.getFieldValue( "Connection" ) ); // to respond to a Connection keep alive
 		response.put( "Sec-WebSocket-Origin", request.getFieldValue( "Origin" ) );
-		String location = "ws://" + request.getFieldValue( "Host" ) + request.getResourceDescriptor();
+		String location = "ws://" + request.getFieldValue( "Host" ) + request.resourceDescriptor();
 		response.put( "Sec-WebSocket-Location", location );
 		String key1 = request.getFieldValue( "Sec-WebSocket-Key1" );
 		String key2 = request.getFieldValue( "Sec-WebSocket-Key2" );

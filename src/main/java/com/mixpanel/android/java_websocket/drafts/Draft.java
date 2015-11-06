@@ -92,12 +92,12 @@ public abstract class Draft {
 			// translating/parsing the response from the SERVER
 			handshake = new HandshakeImpl1Server();
 			ServerHandshakeBuilder serverhandshake = (ServerHandshakeBuilder) handshake;
-			serverhandshake.setHttpStatus( Short.parseShort( firstLineTokens[ 1 ] ) );
-			serverhandshake.setHttpStatusMessage( firstLineTokens[ 2 ] );
+			serverhandshake.bindHttpStatus(Short.parseShort(firstLineTokens[1]));
+			serverhandshake.bindHttpStatusMessage(firstLineTokens[2]);
 		} else {
 			// translating/parsing the request from the CLIENT
 			ClientHandshakeBuilder clienthandshake = new HandshakeImpl1Client();
-			clienthandshake.setResourceDescriptor( firstLineTokens[ 1 ] );
+			clienthandshake.bindResourceDescriptor(firstLineTokens[1]);
 			handshake = clienthandshake;
 		}
 
@@ -164,10 +164,10 @@ public abstract class Draft {
 		StringBuilder bui = new StringBuilder( 100 );
 		if( handshakedata instanceof ClientHandshake ) {
 			bui.append( "GET " );
-			bui.append( ( (ClientHandshake) handshakedata ).getResourceDescriptor() );
+			bui.append( ( (ClientHandshake) handshakedata ).resourceDescriptor() );
 			bui.append( " HTTP/1.1" );
 		} else if( handshakedata instanceof ServerHandshake ) {
-			bui.append( "HTTP/1.1 101 " + ( (ServerHandshake) handshakedata ).getHttpStatusMessage() );
+			bui.append( "HTTP/1.1 101 " + ( (ServerHandshake) handshakedata ).httpStatusMessage() );
 		} else {
 			throw new RuntimeException( "unknow role" );
 		}

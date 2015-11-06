@@ -204,7 +204,7 @@ public class Draft_10 extends Draft {
 	public HandshakeBuilder postProcessHandshakeResponseAsServer( ClientHandshake request, ServerHandshakeBuilder response ) throws InvalidHandshakeException {
 		response.put( "Upgrade", "websocket" );
 		response.put( "Connection", request.getFieldValue( "Connection" ) ); // to respond to a Connection keep alives
-		response.setHttpStatusMessage( "Switching Protocols" );
+		response.bindHttpStatusMessage("Switching Protocols");
 		String seckey = request.getFieldValue( "Sec-WebSocket-Key" );
 		if( seckey == null )
 			throw new InvalidHandshakeException( "missing Sec-WebSocket-Key" );

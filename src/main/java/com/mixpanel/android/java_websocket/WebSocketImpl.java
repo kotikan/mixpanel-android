@@ -224,7 +224,7 @@ public class WebSocketImpl implements WebSocket {
 								ClientHandshake handshake = (ClientHandshake) tmphandshake;
 								handshakestate = d.acceptHandshakeAsServer( handshake );
 								if( handshakestate == HandshakeState.MATCHED ) {
-									resourceDescriptor = handshake.getResourceDescriptor();
+									resourceDescriptor = handshake.resourceDescriptor();
 									ServerHandshakeBuilder response;
 									try {
 										response = wsl.onWebsocketHandshakeReceivedAsServer( this, d, handshake );
@@ -375,13 +375,13 @@ public class WebSocketImpl implements WebSocket {
 					throw new InvalidDataException( CloseFrame.PROTOCOL_ERROR, "Continuous frame sequence not completed." );
 				} else if( curop == Opcode.TEXT ) {
 					try {
-						wsl.onWebsocketMessage( this, Charsetfunctions.stringUtf8( f.getPayloadData() ) );
+						wsl.onWebsocketMessage(this, Charsetfunctions.stringUtf8(f.getPayloadData()));
 					} catch ( RuntimeException e ) {
 						wsl.onWebsocketError( this, e );
 					}
 				} else if( curop == Opcode.BINARY ) {
 					try {
-						wsl.onWebsocketMessage( this, f.getPayloadData() );
+						wsl.onWebsocketMessageBlob(this, f.getPayloadData());
 					} catch ( RuntimeException e ) {
 						wsl.onWebsocketError( this, e );
 					}
@@ -620,7 +620,7 @@ public class WebSocketImpl implements WebSocket {
 		// Store the Handshake Request we are about to send
 		this.handshakerequest = draft.postProcessHandshakeRequestAsClient( handshakedata );
 
-		resourceDescriptor = handshakedata.getResourceDescriptor();
+		resourceDescriptor = handshakedata.resourceDescriptor();
 		assert( resourceDescriptor != null );
 		
 		// Notify Listener

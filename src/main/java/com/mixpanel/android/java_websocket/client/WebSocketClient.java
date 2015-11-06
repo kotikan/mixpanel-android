@@ -226,7 +226,7 @@ public abstract class WebSocketClient extends WebSocketAdapter implements Runnab
 		String host = uri.getHost() + ( port != WebSocket.DEFAULT_PORT ? ":" + port : "" );
 
 		HandshakeImpl1Client handshake = new HandshakeImpl1Client();
-		handshake.setResourceDescriptor( path );
+		handshake.bindResourceDescriptor(path);
 		handshake.put( "Host", host );
 		if( headers != null ) {
 			for( Map.Entry<String,String> kv : headers.entrySet() ) {
@@ -247,12 +247,12 @@ public abstract class WebSocketClient extends WebSocketAdapter implements Runnab
 	 * Calls subclass' implementation of <var>onMessage</var>.
 	 */
 	@Override
-	public final void onWebsocketMessage( WebSocket conn, String message ) {
+	public final void onWebsocketMessage(WebSocket conn, String message) {
 		onMessage( message );
 	}
 
 	@Override
-	public final void onWebsocketMessage( WebSocket conn, ByteBuffer blob ) {
+	public final void onWebsocketMessageBlob(WebSocket conn, ByteBuffer blob) {
 		onMessage( blob );
 	}
 

@@ -1,28 +1,28 @@
 package com.mixpanel.android.java_websocket.handshake;
 
 public class HandshakeImpl1Server extends HandshakedataImpl1 implements ServerHandshakeBuilder {
-	private short httpstatus;
-	private String httpstatusmessage;
+	private short status;
+	private String message;
 
 	public HandshakeImpl1Server() {
 	}
 
 	@Override
-	public String getHttpStatusMessage() {
-		return httpstatusmessage;
+	public String httpStatusMessage() {
+		return message;
 	}
 
 	@Override
-	public short getHttpStatus() {
-		return httpstatus;
+	public short httpStatus() {
+		return status;
 	}
 
-	public void setHttpStatusMessage( String message ) {
-		this.httpstatusmessage = message;
+	public void bindHttpStatusMessage(String message) {
+		this.message = message;
 	}
 
-	public void setHttpStatus( short status ) {
-		httpstatus = status;
+	public void bindHttpStatus(short status) {
+		this.status = status;
 	}
 
 
