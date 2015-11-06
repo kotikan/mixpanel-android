@@ -1,3 +1,7 @@
+Note on this Fork
+-----------------
+The purpose of this fork is to fix (primarily syntactic) issues with the Mixpanel-Android codebase to make it compatible with a straightfoward automatic Xamarin binding.
+
 Getting Started
 ---------------
 You can find getting started guides for using Mixpanel at:
