@@ -24,7 +24,7 @@ android {
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
 
         lintOptions {
-            abortOnError false
+            abortOnError true
             warningsAsErrors true
             disable "UnusedResources"
         }
