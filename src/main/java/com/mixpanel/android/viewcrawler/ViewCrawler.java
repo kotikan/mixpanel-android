@@ -202,8 +202,9 @@ public class ViewCrawler implements UpdatesFromMixpanel, TrackingDebug, ViewVisi
         }
 
         private void installConnectionSensor(final Activity activity) {
-            if (isInEmulator() && !mConfig.getDisableEmulatorBindingUI()) {
+            if ((isInEmulator() || isInGenymotion()) && !mConfig.getDisableEmulatorBindingUI()) {
                 mEmulatorConnector.start();
+                Log.i("Mixpanel", "Started emulator connector");
             } else if (!mConfig.getDisableGestureBindingUI()) {
                 final SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
                 final Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -212,12 +213,18 @@ public class ViewCrawler implements UpdatesFromMixpanel, TrackingDebug, ViewVisi
         }
 
         private void uninstallConnectionSensor(final Activity activity) {
-            if (isInEmulator() && !mConfig.getDisableEmulatorBindingUI()) {
+            if ((isInEmulator() || isInGenymotion()) && !mConfig.getDisableEmulatorBindingUI()) {
                 mEmulatorConnector.stop();
             } else if (!mConfig.getDisableGestureBindingUI()) {
                 final SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
                 sensorManager.unregisterListener(mFlipGesture);
             }
+        }
+
+        private boolean isInGenymotion() {
+            Log.i("Mixpanel", Build.HARDWARE);
+            Log.i("Mixpanel", "vbox86".equals(Build.HARDWARE) ? "IS in Genymotion" : "NOT in Genymotion");
+            return "vbox86".equals(Build.HARDWARE);
         }
 
         private boolean isInEmulator() {
