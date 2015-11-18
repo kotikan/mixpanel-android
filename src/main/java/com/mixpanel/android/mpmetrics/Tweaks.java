@@ -57,15 +57,13 @@ public class Tweaks {
         return new HashMap<String, TweakValue>(mTweakValues);
     }
 
-    @IntDef({
-            BOOLEAN_TYPE,
-            DOUBLE_TYPE,
-            LONG_TYPE,
-            STRING_TYPE
-    })
-
-    @Retention(RetentionPolicy.SOURCE)
-    private @interface TweakType {}
+    /**
+     * An internal description of the type of a tweak.
+     * These values are used internally to expose
+     * tweaks to the Mixpanel UI, and will likely not be directly useful to
+     * code that imports the Mixpanel library.
+     */
+    public static final int BOOLEAN_TYPE = 1;
 
     /**
      * An internal description of the type of a tweak.
@@ -73,7 +71,7 @@ public class Tweaks {
      * tweaks to the Mixpanel UI, and will likely not be directly useful to
      * code that imports the Mixpanel library.
      */
-    public static final @TweakType int BOOLEAN_TYPE = 1;
+    public static final int DOUBLE_TYPE = 2;
 
     /**
      * An internal description of the type of a tweak.
@@ -81,7 +79,7 @@ public class Tweaks {
      * tweaks to the Mixpanel UI, and will likely not be directly useful to
      * code that imports the Mixpanel library.
      */
-    public static final @TweakType int DOUBLE_TYPE = 2;
+    public static final int LONG_TYPE = 3;
 
     /**
      * An internal description of the type of a tweak.
@@ -89,15 +87,7 @@ public class Tweaks {
      * tweaks to the Mixpanel UI, and will likely not be directly useful to
      * code that imports the Mixpanel library.
      */
-    public static final @TweakType int LONG_TYPE = 3;
-
-    /**
-     * An internal description of the type of a tweak.
-     * These values are used internally to expose
-     * tweaks to the Mixpanel UI, and will likely not be directly useful to
-     * code that imports the Mixpanel library.
-     */
-    public static final @TweakType int STRING_TYPE = 4;
+    public static final int STRING_TYPE = 4;
 
     /**
      * Represents the value and definition of a tweak known to the system. This class
@@ -105,7 +95,7 @@ public class Tweaks {
      * and will likely not be directly useful to code that imports the Mixpanel library.
      */
     public static class TweakValue {
-        private TweakValue(@TweakType int aType, Object aDefaultValue, Number aMin, Number aMax, Object value) {
+        private TweakValue(int aType, Object aDefaultValue, Number aMin, Number aMax, Object value) {
             type = aType;
             defaultValue = aDefaultValue;
             minimum = aMin;
@@ -179,7 +169,7 @@ public class Tweaks {
             return ret;
         }
 
-        public final @TweakType int type;
+        public final int type;
 
         private final Object value;
         private final Object defaultValue;
@@ -299,7 +289,7 @@ public class Tweaks {
         return mTweakValues.get(tweakName);
     }
 
-    private void declareTweak(String tweakName, Object defaultValue, @TweakType int tweakType) {
+    private void declareTweak(String tweakName, Object defaultValue, int tweakType) {
         if (mTweakValues.containsKey(tweakName)) {
             Log.w(LOGTAG, "Attempt to define a tweak \"" + tweakName + "\" twice with the same name");
             return;
